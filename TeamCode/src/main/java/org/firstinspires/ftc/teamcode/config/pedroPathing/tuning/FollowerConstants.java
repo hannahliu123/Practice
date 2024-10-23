@@ -8,8 +8,6 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Vector;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.util.CustomFilteredPIDFCoefficients;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.util.CustomPIDFCoefficients;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.util.KalmanFilterParameters;
-import org.firstinspires.ftc.teamcode.config.util.RobotConstants;
-import org.firstinspires.ftc.teamcode.config.util.HWValues;
 
 /**
  * This is the FollowerConstants class. It holds many constants and parameters for various parts of
