@@ -54,5 +54,8 @@ public class testTeleOp extends OpMode {
         }
 
         board.setServoPosition(gamepad1.left_trigger);
+
+        telemetry.addData("Pot Angle", board.getPotAngle());
+        board.setServoPosition(board.potRange());
     }
 }

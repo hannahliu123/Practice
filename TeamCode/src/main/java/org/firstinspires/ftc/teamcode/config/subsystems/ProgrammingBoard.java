@@ -1,16 +1,19 @@
 package org.firstinspires.ftc.teamcode.config.subsystems;
 
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 public class ProgrammingBoard {
     private DigitalChannel touchSensor;
     private DcMotor motor;
     private double ticksPerRotation;
     private Servo servo;
+    private AnalogInput pot;
 
     public void init(HardwareMap hardwaremap) {
         touchSensor = hardwaremap.get(DigitalChannel.class, "touch_sensor");
@@ -23,6 +26,8 @@ public class ProgrammingBoard {
         ticksPerRotation = motor.getMotorType().getTicksPerRev();
 
         servo = hardwaremap.get(Servo.class, "servo");
+
+        pot = hardwaremap.get(AnalogInput.class, "potentiometer");
     }
 
     public boolean isTouchSensorPressed() {
@@ -47,5 +52,13 @@ public class ProgrammingBoard {
 
     public void setServoPosition(double position) { //position is a double between 0.0 & 1.0; you can also change the range or flip the direction of the range, but it's not needed
         servo.setPosition(position);
+    }
+
+    public double getPotAngle() {
+        return Range.scale(pot.getVoltage(), 0, pot.getMaxVoltage(), 0, 270); //LearnJavaForFTC Lesson 9.2
+    }
+
+    public double potRange() {
+        return Range.scale(pot.getVoltage(), 0, pot.getMaxVoltage(), 0.0, 1.0); //LearnJavaForFTC Lesson 9.2
     }
 }
