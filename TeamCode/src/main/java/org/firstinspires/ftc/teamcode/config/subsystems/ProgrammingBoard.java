@@ -1,12 +1,16 @@
 package org.firstinspires.ftc.teamcode.config.subsystems;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class ProgrammingBoard {
     private DigitalChannel touchSensor;
@@ -14,6 +18,8 @@ public class ProgrammingBoard {
     private double ticksPerRotation;
     private Servo servo;
     private AnalogInput pot;
+    private ColorSensor colorSensor;
+    private DistanceSensor distanceSensor;
 
     public void init(HardwareMap hardwaremap) {
         touchSensor = hardwaremap.get(DigitalChannel.class, "touch_sensor");
@@ -28,6 +34,9 @@ public class ProgrammingBoard {
         servo = hardwaremap.get(Servo.class, "servo");
 
         pot = hardwaremap.get(AnalogInput.class, "potentiometer");
+
+        colorSensor = hardwaremap.get(ColorSensor.class, "color_distance_sensor");
+        distanceSensor = hardwaremap.get(DistanceSensor.class, "color_distance_sensor");
     }
 
     public boolean isTouchSensorPressed() {
@@ -60,5 +69,17 @@ public class ProgrammingBoard {
 
     public double potRange() {
         return Range.scale(pot.getVoltage(), 0, pot.getMaxVoltage(), 0.0, 1.0); //LearnJavaForFTC Lesson 9.2
+    }
+
+    public int getAmountRed() {
+        return colorSensor.red();
+    }
+
+    public double getDistance(DistanceUnit du) {
+        return distanceSensor.getDistance(du);
+    }
+
+    public int getAmountBlue() {
+        return colorSensor.blue();
     }
 }

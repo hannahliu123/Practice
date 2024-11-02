@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmode;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.config.subsystems.ProgrammingBoard;
 import org.firstinspires.ftc.teamcode.config.subsystems.testClaw;
 
@@ -57,5 +58,15 @@ public class testTeleOp extends OpMode {
 
         telemetry.addData("Pot Angle", board.getPotAngle());
         board.setServoPosition(board.potRange());
+
+        telemetry.addData("Amount Red", board.getAmountRed());
+        telemetry.addData("Distance (cm)", board.getDistance(DistanceUnit.CM));
+        telemetry.addData("Distance (in)", board.getDistance(DistanceUnit.INCH));
+        telemetry.addData("Amount Blue", board.getAmountBlue());
+
+        if (board.getDistance(DistanceUnit.CM)<10){
+            board.setMotorSpeed(0);
+        }
+        board.setMotorSpeed(0.5);
     }
 }
