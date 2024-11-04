@@ -1,4 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmode;
+import org.checkerframework.checker.units.qual.Angle;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.config.subsystems.ProgrammingBoard;
 import org.firstinspires.ftc.teamcode.config.subsystems.testClaw;
@@ -6,6 +8,7 @@ import org.firstinspires.ftc.teamcode.config.subsystems.testClaw;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
 public class testTeleOp extends OpMode {
@@ -68,5 +71,13 @@ public class testTeleOp extends OpMode {
             board.setMotorSpeed(0);
         }
         board.setMotorSpeed(0.5);
+
+        telemetry.addData("Our Heading (Degrees)", board.getHeading(AngleUnit.DEGREES));
+        telemetry.addData("Our Heading (Radians)", board.getHeading(AngleUnit.RADIANS));
+
+        double deg = board.getHeading(AngleUnit.DEGREES);
+        double motor = Range.scale(deg, -180, 180, -1.0, 1.0);
+
+        board.setMotorSpeed(motor);
     }
 }

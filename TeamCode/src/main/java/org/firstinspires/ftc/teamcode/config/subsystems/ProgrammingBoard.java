@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.config.subsystems;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,9 +8,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+import org.checkerframework.checker.units.qual.Angle;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class ProgrammingBoard {
@@ -20,6 +24,7 @@ public class ProgrammingBoard {
     private AnalogInput pot;
     private ColorSensor colorSensor;
     private DistanceSensor distanceSensor;
+    private IMU imu;
 
     public void init(HardwareMap hardwaremap) {
         touchSensor = hardwaremap.get(DigitalChannel.class, "touch_sensor");
@@ -37,6 +42,12 @@ public class ProgrammingBoard {
 
         colorSensor = hardwaremap.get(ColorSensor.class, "color_distance_sensor");
         distanceSensor = hardwaremap.get(DistanceSensor.class, "color_distance_sensor");
+
+        imu = hardwaremap.get(IMU.class, "imu");
+
+        RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
+
+        imu.initialize(new IMU.Parameters(RevOrientation));
     }
 
     public boolean isTouchSensorPressed() {
@@ -81,5 +92,9 @@ public class ProgrammingBoard {
 
     public int getAmountBlue() {
         return colorSensor.blue();
+    }
+
+    public double getHeading(AngleUnit angleUnit) {
+        return imu.getRobotYawPitchRollAngles().getYaw(angleUnit);
     }
 }
