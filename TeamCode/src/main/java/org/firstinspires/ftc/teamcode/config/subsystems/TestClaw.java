@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.config.util.action.RunAction;
 
-public class testClaw {
+public class TestClaw {
 
     public Servo servo;
     public RunAction open, close;
 
-    public testClaw(HardwareMap hi){
+    public TestClaw(HardwareMap hi){
         servo = hi.get(Servo.class, "servo");
 
         open = new RunAction(this::open);

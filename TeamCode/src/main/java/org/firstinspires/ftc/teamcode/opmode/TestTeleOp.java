@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.opmode;
-import org.checkerframework.checker.units.qual.Angle;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.config.subsystems.ProgrammingBoard;
-import org.firstinspires.ftc.teamcode.config.subsystems.testClaw;
+import org.firstinspires.ftc.teamcode.config.subsystems.TestClaw;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -11,14 +10,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
-public class testTeleOp extends OpMode {
-    public testClaw testClaw;
+public class TestTeleOp extends OpMode {
+    public TestClaw testClaw;
     ProgrammingBoard board = new ProgrammingBoard();
     String touchSensor;
 
     @Override
     public void init(){
-        testClaw = new testClaw(hardwareMap);
+        testClaw = new TestClaw(hardwareMap);
         board.init(hardwareMap);
     }
 
